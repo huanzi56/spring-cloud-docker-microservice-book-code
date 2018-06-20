@@ -5,13 +5,13 @@
   <groupId>com.itmuch.cloud</groupId>
   <artifactId>microservice-discovery-eureka</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <packaging>jar</packaging>
+  <!--<packaging>pom</packaging>-->
 
   <!-- 引入spring boot的依赖 -->
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>1.4.3.RELEASE</version>
+    <version>1.5.4.RELEASE</version>
   </parent>
 
   <properties>
@@ -32,19 +32,42 @@
       <dependency>
         <groupId>org.springframework.cloud</groupId>
         <artifactId>spring-cloud-dependencies</artifactId>
-        <version>Camden.SR4</version>
+        <version>Dalston.SR1</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
 
+
   <!-- 添加spring-boot的maven插件 -->
   <build>
     <plugins>
       <plugin>
+        <groupId>com.spotify</groupId>
+        <artifactId>docker-maven-plugin</artifactId>
+        <version>0.4.14</version>
+        <configuration>
+          <!-- 注意imageName一定要是符合正则[a-z0-9-_.]的，否则构建不会成功 -->
+          <!-- 详见：https://github.com/spotify/docker-maven-plugin    Invalid repository name ... only [a-z0-9-_.] are allowed-->
+          <imageName>huanzi56/microservice-discovery-enreka:0.0.1</imageName>
+          <baseImage>java</baseImage>
+          <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
+          <resources>
+            <resource>
+              <targetPath>/</targetPath>
+              <directory>${project.build.directory}</directory>
+              <include>${project.build.finalName}.jar</include>
+            </resource>
+          </resources>
+        </configuration>
+      </plugin>
+      <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <fork>true</fork>
+        </configuration>
       </plugin>
     </plugins>
   </build>
