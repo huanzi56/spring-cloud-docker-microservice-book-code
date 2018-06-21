@@ -9,12 +9,7 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
   instance:
     prefer-ip-address: true
-
-#解决8040/routes 报Unauthorized 401的问题
-management:
-  security:
-    enabled: false
-
-#zuul:
-#  routes:
-#    microservice-provider-user: /user/**
+zuul:
+  ignored-services: '*'   # 使用'*'可忽略所有微服务
+  routes:
+    microservice-provider-user: /user/**

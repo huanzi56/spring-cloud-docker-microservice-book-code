@@ -7,12 +7,14 @@ spring:
     config:
       server:
         git:
-          uri: https://git.oschina.net/itmuch/spring-cloud-config-repo/     # 配置Git仓库的地址
-          username:                                                         # Git仓库的账号
-          password:                                                         # Git仓库的密码
+          uri: http://gitlab.itm.xfyun.cn/RAIBOO/config-server.git     # 配置Git仓库的地址
+          username: huanwu                                            # Git仓库的账号
+          password: 1qaz2wsx#EDC                                                                              # Git仓库的密码
+          clone-on-start: true
         health:
           repositories:
             a-foo: 
               label: config-label-v2.0
               name: microservice-foo
-              profiles: dev
+              profiles: production
+          enabled: false
