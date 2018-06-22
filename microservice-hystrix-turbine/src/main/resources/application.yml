@@ -6,9 +6,9 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://discovery:8761/eureka/
   instance:
     prefer-ip-address: true
 turbine:
-  appConfig: microservice-consumer-movie,microservice-consumer-movie-feign-hystrix-fallback-stream
+  appConfig: microservice-consumer-movie-ribbon-hystrix,microservice-provider-user
   clusterNameExpression: "'default'"
