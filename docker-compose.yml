@@ -2,7 +2,7 @@ version: '2'
 services:
   microservice-discovery-eureka:
     image: huanzi56/microservice-discovery-eureka:0.0.1
-    port:
+    ports:
       - "8761:8761"
   microservice-provider-user:
     image: huanzi56/microservice-provider-user:0.0.1
