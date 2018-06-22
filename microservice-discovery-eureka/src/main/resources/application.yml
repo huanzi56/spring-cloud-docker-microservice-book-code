@@ -1,5 +1,6 @@
 server:
-  port: 8761                    # 指定该Eureka实例的端口
+  port: 8761  # 指定该Eureka实例的端口
+  context-path: /eureka
 eureka:
   instance:
     hostname: discovery
