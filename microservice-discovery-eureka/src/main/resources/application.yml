@@ -3,7 +3,7 @@ security:
     enabled: true               # 开启基于HTTP basic的认证
   user:
     name: admin                  # 配置登录的账号
-    password: xylx1.t!@#       # 配置登录的密码
+    password: xylx1.t       # 配置登录的密码
 server:
   port: 8761  # 指定该Eureka实例的端口
 eureka:

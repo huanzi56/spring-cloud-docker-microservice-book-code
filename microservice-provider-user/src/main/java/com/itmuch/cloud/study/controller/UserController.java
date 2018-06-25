@@ -1,5 +1,6 @@
 package com.itmuch.cloud.study.controller;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,9 +14,17 @@ public class UserController {
   @Autowired
   private UserRepository userRepository;
 
+  @HystrixCommand(fallbackMethod = "findByIdFallback")
   @GetMapping("/{id}")
   public User findById(@PathVariable Long id) {
     User findOne = this.userRepository.findOne(id);
     return findOne;
+  }
+
+  public User findByIdFallback(Long id) {
+    User user = new User();
+    user.setId(-1L);
+    user.setName("默认用户");
+    return user;
   }
 }
